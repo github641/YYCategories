@@ -132,7 +132,14 @@ NS_ASSUME_NONNULL_BEGIN
  @return the decoded string.
  */
 - (NSString *)stringByURLDecode;
-
+/* lzy注170602：
+ HTML中<，>，&等有特殊含义（<，>，用于链接签，&用于转义），不能直接使用。这些符号是不显示在我们最终看到的网页里的，那如果我们希望在网页中显示这些符号，该怎么办呢？
+ 
+ 这就要说到HTML转义字符串（Escape Sequence）了。
+ 
+ 转义字符串（Escape Sequence）也称字符实体(Character Entity)。在HTML中，定义转义字符串的原因有两个：第一个原因是像“<”和“>”这类符号已经用来表示HTML标签，因此就不能直接当作文本中的符号来使用。为了在HTML文档中使用这些符号，就需要定义它的转义字符串。当解释程序遇到这类字符串时就把它解释为真实的字符。在输入转义字符串时，要严格遵守字母大小写的规则。第二个原因是，有些字符在ASCII字符集中没有定义，因此需要使用转义字符串来表示。
+ http://114.xixik.com/character/
+ */
 /**
  Escape commmon HTML to Entity.
  Example: "a>b" will be escape to "a&gt;b".
@@ -144,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Drawing
 ///=============================================================================
 
-/**
+/**返回指定的字号和换行模式的字符串渲染需要的size
  Returns the size of the string if it were rendered with the specified constraints.
  
  @param font          The font to use for computing the string size.

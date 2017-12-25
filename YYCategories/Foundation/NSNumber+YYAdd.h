@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface NSNumber (YYAdd)
 
-/**
+/**创建并返回一个该字符串描述的NSNuber对象。
  Creates and returns an NSNumber object from a string.
  Valid format: @"12", @"12.345", @" -0xFF", @" .23e99 "...
  

@@ -18,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
  to post notification in different thread.
  */
 @interface NSNotificationCenter (YYAdd)
-
+/* lzy注170602：
+ 在这里多判断了下pthread_main_np()的值，这个函数“ returns non-zero if the current thread is the main thread ”
+ */
 /**
  Posts a given notification to the receiver on main thread.
  If current thread is main thread, the notification is posted synchronized;

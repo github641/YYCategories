@@ -97,6 +97,9 @@ YYSYNTH_DUMMY_CLASS(NSString_YYAdd)
 
 - (NSString *)stringByURLEncode {
     if ([self respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
+        /* lzy注170614：
+         之前没有注意，在看AFN时，发现和这里的方法很相似。YY在下面备注了来自AFN。
+         */
         /**
          AFNetworking/AFURLRequestSerialization.m
          
@@ -147,7 +150,45 @@ YYSYNTH_DUMMY_CLASS(NSString_YYAdd)
 #pragma clang diagnostic pop
     }
 }
-
+//[170524lzy] MKNetworkKit中的一个方法
+/*
+ NSDictionary *d1 = @{@"cate" : @"0", @"new" : @"1"};
+ 转换为 new=1&cate=0  的形式
+ 
+ + (NSString*) dk_urlEncodedString:(NSString *)string { // mk_ prefix prevents a clash with a private api
+ 
+ CFStringRef encodedCFString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+ (__bridge CFStringRef) string,
+ nil,
+ CFSTR("?!@#$^&%*+,:;='\"`<>()[]{}/\\| "),
+ kCFStringEncodingUTF8);
+ 
+ NSString *encodedString = [[NSString alloc] initWithString:(__bridge_transfer NSString*) encodedCFString];
+ 
+ if(!encodedString)
+ encodedString = @"";
+ 
+ return encodedString;
+ }
+ + (NSString*) urlEncodedKeyValueString:(NSDictionary *)dict{
+ 
+ NSMutableString *string = [NSMutableString string];
+ for (NSString *key in dict) {
+ 
+ NSObject *value = [dict valueForKey:key];
+ if([value isKindOfClass:[NSString class]])
+ [string appendFormat:@"%@=%@&", [self dk_urlEncodedString:key], [self dk_urlEncodedString:((NSString*)value)]];
+ else
+ [string appendFormat:@"%@=%@&", [self dk_urlEncodedString:key], value];
+ }
+ 
+ if([string length] > 0)
+ [string deleteCharactersInRange:NSMakeRange([string length] - 1, 1)];
+ 
+ return string;
+ 
+ }
+ */
 - (NSString *)stringByURLDecode {
     if ([self respondsToSelector:@selector(stringByRemovingPercentEncoding)]) {
         return [self stringByRemovingPercentEncoding];

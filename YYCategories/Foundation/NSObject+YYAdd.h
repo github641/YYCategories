@@ -8,7 +8,10 @@
 //  This source code is licensed under the MIT-style license found in the
 //  LICENSE file in the root directory of this source tree.
 //
-
+/* lzy注170602：
+ waitUntilDone
+ 一般是，是否要阻塞默认的线程的flag
+ */
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,7 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
                if the selector's `return type` is void.
  
  Sample Code:
- 
+ lzy170602标注：从例子入手看看
+
      // no variable args
      [view performSelectorWithArgs:@selector(removeFromSuperView)];
      
@@ -78,6 +82,8 @@ NS_ASSUME_NONNULL_BEGIN
                selector's method declaration, or unexpected results may occur.
                It doesn't support union or struct which is larger than 256 bytes.
  
+ lzy170602标注：加了延时参数
+
  Sample Code:
  
      // no variable args
@@ -88,7 +94,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)performSelectorWithArgs:(SEL)sel afterDelay:(NSTimeInterval)delay, ...;
 
-/**
+/** lzy170602标注：在主线程、是否阻塞当前线程直到方法执行结束flag
+
  Invokes a method of the receiver on the main thread using the default mode.
  
  @param sel    A selector identifying the message to send. If the selector is
@@ -120,7 +127,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable id)performSelectorWithArgsOnMainThread:(SEL)sel waitUntilDone:(BOOL)wait, ...;
 
-/**
+/** lzy170602标注：在指定线程执行、是否阻塞当前线程直到方法执行结束flag
+
  Invokes a method of the receiver on the specified thread using the default mode.
  
  @param sel    A selector identifying the message to send. If the selector is
@@ -156,7 +164,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable id)performSelectorWithArgs:(SEL)sel onThread:(NSThread *)thread waitUntilDone:(BOOL)wait, ...;
 
-/**
+/** lzy170602标注：在后台线程执行某方法
+
  Invokes a method of the receiver on a new background thread.
  
  @param sel    A selector identifying the message to send. If the selector is
@@ -180,7 +189,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)performSelectorWithArgsInBackground:(SEL)sel, ...;
 
-/**
+/** lzy170602标注：延迟执行方法
+
  Invokes a method of the receiver on the current thread after a delay.
  
  @warning     arc-performSelector-leaks
@@ -211,7 +221,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Swap method (Swizzling)
 ///=============================================================================
 
-/**
+/** lzy170602标注：实例方法的方法交换
+
  Swap two instance method's implementation in one class. Dangerous, be careful.
  
  @param originalSel   Selector 1.
@@ -220,7 +231,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)swizzleInstanceMethod:(SEL)originalSel with:(SEL)newSel;
 
-/**
+/** lzy170602标注：类方法的方法交换
+
  Swap two class method's implementation in one class. Dangerous, be careful.
  
  @param originalSel   Selector 1.
@@ -235,7 +247,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Associate value
 ///=============================================================================
 
-/**
+/** lzy170602标注：给方法执行者关联一个 strong\nonatomic的值
+
  Associate one object to `self`, as if it was a strong property (strong, nonatomic).
  
  @param value   The object to associate.
@@ -243,7 +256,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setAssociateValue:(nullable id)value withKey:(void *)key;
 
-/**
+/**lzy170602标注：给方法执行者关联一个 weak\nonatomic的值
+
  Associate one object to `self`, as if it was a weak property (week, nonatomic).
  
  @param value  The object to associate.
@@ -251,14 +265,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setAssociateWeakValue:(nullable id)value withKey:(void *)key;
 
-/**
+/** lzy170602标注：获取方法执行者所关联的值
+
  Get the associated value from `self`.
  
  @param key The pointer to get value from `self`.
  */
 - (nullable id)getAssociatedValueForKey:(void *)key;
 
-/**
+/**lzy170602标注：移除所有关联
  Remove all associated values.
  */
 - (void)removeAssociatedValues;

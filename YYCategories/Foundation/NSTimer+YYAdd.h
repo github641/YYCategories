@@ -8,7 +8,9 @@
 //  This source code is licensed under the MIT-style license found in the
 //  LICENSE file in the root directory of this source tree.
 //
-
+/* lzy注170605：
+ iOS 10的开发sdk已经实现了下面两个方法的block回调形式。
+ */
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
