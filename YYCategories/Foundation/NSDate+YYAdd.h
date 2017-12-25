@@ -30,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSInteger minute; ///< Minute component (0~59)
 @property (nonatomic, readonly) NSInteger second; ///< Second component (0~59)
 @property (nonatomic, readonly) NSInteger nanosecond; ///< Nanosecond component
+
+/* lzy注170601：
+ 当前天数，在一周中的第几天。格里高利日历是从周日为第1天。在模拟器和真机测试中，“first day is based on user setting”并不起作用。
+ */
 @property (nonatomic, readonly) NSInteger weekday; ///< Weekday component (1~7, first day is based on user setting)
 @property (nonatomic, readonly) NSInteger weekdayOrdinal; ///< WeekdayOrdinal component
 @property (nonatomic, readonly) NSInteger weekOfMonth; ///< WeekOfMonth component (1~5)
@@ -120,7 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSString *)stringWithFormat:(NSString *)format;
 
-/**
+/**实例方法，根据给定的日期格式、时区、本地化，返回一个时间字符串
  Returns a formatted string representing this date.
  see http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns
  for format description.

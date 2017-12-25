@@ -8,7 +8,9 @@
 //  This source code is licensed under the MIT-style license found in the
 //  LICENSE file in the root directory of this source tree.
 //
-
+/* lzy注170602：
+ 对NSKeyedUnarchiver的扩展，是为了对unarchive数据失败时进行catch，把抛出的异常信息返回给调用者
+ */
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN

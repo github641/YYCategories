@@ -103,6 +103,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSData *)sha512Data;
 
+/* lzy注170601：
+ 下面带有hmac的方法是“Hash-based message authentication code，利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出。”的方法。
+ */
 /**
  Returns a lowercase NSString for hmac using algorithm md5 with key.
  @param key  The hmac key.
@@ -175,7 +178,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSData *)hmacSHA512DataWithKey:(NSData *)key;
 
-/**
+/**循环冗余校验CRC(Cyclic Redundancy Check/Code)是对一个传送数据块进行校验，是一种高效的差错控制方法。
  Returns a lowercase NSString for crc32 hash.
  */
 - (NSString *)crc32String;
@@ -226,7 +229,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSString *)utf8String;
 
-/**
+/**将NSData转为 16进制格式的字符串
  Returns a uppercase NSString in HEX.
  */
 - (nullable NSString *)hexString;
@@ -254,7 +257,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable NSData *)dataWithBase64EncodedString:(NSString *)base64EncodedString;
 
-/**
+/**将NSData转Json，返回一个NSArray或NSDictionary。返回nil当data转json对象出现错误。
  Returns an NSDictionary or NSArray for decoded self.
  Returns nil if an error occurs.
  */
@@ -266,25 +269,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Inflate and deflate
 ///=============================================================================
 
-/**
+/**解压缩gzip的data，返回解压结果
  Decompress data from gzip data.
  @return Inflated data.
  */
 - (nullable NSData *)gzipInflate;
 
-/**
+/**压缩data为gzip，使用默认的压缩等级
  Comperss data to gzip in default compresssion level.
  @return Deflated data.
  */
 - (nullable NSData *)gzipDeflate;
 
-/**
+/**解压缩，zlib压缩数据的解压
  Decompress data from zlib-compressed data.
  @return Inflated data.
  */
 - (nullable NSData *)zlibInflate;
 
-/**
+/**压缩data为zlib压缩格式，使用默认的压缩等级
  Comperss data to zlib-compressed in default compresssion level.
  @return Deflated data.
  */
@@ -296,7 +299,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Others
 ///=============================================================================
 
-/**
+/**从main bundle目录的文件，创建NSData。注意name需要包括文件后缀
  Create data from the file in main bundle (similar to [UIImage imageNamed:]).
  
  @param name The file name (in main bundle).

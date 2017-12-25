@@ -51,7 +51,10 @@ YYSYNTH_DUMMY_CLASS(NSArray_YYAdd)
 - (id)objectOrNilAtIndex:(NSUInteger)index {
     return index < self.count ? self[index] : nil;
 }
-
+/* lzy注170601：
+ if语句内部error没有判断，之前的想法是：我的代码不是最新的，下了不知道哪个版本的代码；作者可能忘记判断了。仔细想想，if语句进入的条件是，self是否是有效的JSONObject，是的话才会进入该方法，这才是没有再判断error的原因。
+ 被方法注释给误导了一下“return nil if an error occurs.”
+ */
 - (NSString *)jsonStringEncoded {
     if ([NSJSONSerialization isValidJSONObject:self]) {
         NSError *error;

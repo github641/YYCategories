@@ -27,7 +27,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSArray<NSNumber *> *)preferredScales;
 
-/**
+/** 背景：本来像 a.png a@2x.png a@3x.png是由iOS系统在运行时根据屏幕自动决定。
+ 但是对于 自定义bundle中的素材是不会自动获取的。
+ 
+ 这个方法就是为了，根据屏幕分辨率加载bundle中的不同规格的素材。
+ 
+ 开发搜索sdk时，加载bundle素材就是使用了这个方法，测试是OK的。
+ + (UIImage *)bundlePictureWithName:(NSString *)picName{
+ 
+ NSString *path = [[NSBundle mainBundle] pathForScaledResource:picName ofType:@"png" inDirectory:@"ZYSearchAd.bundle"];
+ //    DebugLog(@"%s %@", __func__, path);
+ 
+ return [UIImage imageWithContentsOfFile:path];
+ }
+ 
  Returns the full pathname for the resource file identified by the specified 
  name and extension and residing in a given bundle directory. It first search
  the file with current screen's scale (such as @2x), then search from higher
