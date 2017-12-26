@@ -44,15 +44,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (CGRect)boundsForOrientation:(UIInterfaceOrientation)orientation;
 
-/**
+/**屏幕的真实像素尺寸
  The screen's real size in pixel (width is always smaller than height).
  This value may not be very accurate in an unknown device, or simulator.
  e.g. (768,1024)
  */
 @property (nonatomic, readonly) CGSize sizeInPixel;
 
-/**
- The screen's PPI.
+/**每英寸像素数量
+ The screen's PPI.（pixel per inch）
  This value may not be very accurate in an unknown device, or simulator.
  Default value is 96.
  */

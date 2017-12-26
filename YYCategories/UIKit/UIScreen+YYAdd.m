@@ -130,7 +130,13 @@ YYSYNTH_DUMMY_CLASS(UIScreen_YYAdd);
             @"iPhone9,2" : @401, //@"iPhone 7 Plus",
             @"iPhone9,3" : @326, //@"iPhone 7",
             @"iPhone9,4" : @401, //@"iPhone 7 Plus",
-
+            @"iPhone10,1" : @"iPhone 8",
+            @"iPhone10,4" : @"iPhone 8",
+            @"iPhone10,2" : @"iPhone 8 Plus",
+            @"iPhone10,5" : @"iPhone 8 Plus",
+            @"iPhone10,3" : @"iPhone X",
+            @"iPhone10,6" : @"iPhone X",
+            
             @"iPad1,1" : @132, //@"iPad 1",
             @"iPad2,1" : @132, //@"iPad 2 (WiFi)",
             @"iPad2,2" : @132, //@"iPad 2 (GSM)",
