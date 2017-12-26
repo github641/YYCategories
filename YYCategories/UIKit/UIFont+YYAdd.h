@@ -14,7 +14,13 @@
 #import <CoreText/CoreText.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+/* lzy注170607：
+ 
+ 字体和data互转。根据文件地址加载font。
+ 以及font的各种属性样式是什么的判断，
+ 根据各种属性样式创建font并返回
+ 
+ */
 /**
  Provides extensions for `UIFont`.
  */

@@ -49,7 +49,7 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
 #define UIColorHex(_hex_)   [UIColor colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
 #endif
 
-/**
+/**提供一些方法，用于UIColor的颜色转换，包括各种格式的互转
  Provide some method for `UIColor` to convert color between
  RGB,HSB,HSL,CMYK and Hex.
 
@@ -59,7 +59,9 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  | HSB(HSV) *  | Hue, Saturation, Brightness (Value)    |
  | HSL         | Hue, Saturation, Lightness             |
  | CMYK        | Cyan, Magenta, Yellow, Black           |
- 
+ rgb，红绿蓝
+ hsb/hsl，色调、饱和度、亮度
+ cmyk，印刷四分色，青、品红、黄、黑
  Apple use RGB & HSB default.
  
  All the value in this category is float number in the range `0.0` to `1.0`.
@@ -179,7 +181,8 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  */
 + (nullable UIColor *)colorWithHexString:(NSString *)hexStr;
 
-/**
+/** 颜色中掺入另一种颜色，需要选择混合模式
+
  Creates and returns a color object by add new color.
  
  @param add        the color added

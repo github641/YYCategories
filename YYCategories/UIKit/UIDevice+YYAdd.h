@@ -8,7 +8,9 @@
 //  This source code is licensed under the MIT-style license found in the
 //  LICENSE file in the root directory of this source tree.
 //
-
+/* lzy注170607：
+ 发现一个无效的方法，其他没有一一测试，可以和我总结得类结合起来看
+ */
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -63,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, readonly) NSString *ipAddressCell;
 
 
-/**
+/** 网络通信类型
  Network traffic type:
  
  WWAN: Wireless Wide Area Network.
@@ -91,7 +93,7 @@ typedef NS_OPTIONS(NSUInteger, YYNetworkTrafficType) {
                               YYNetworkTrafficTypeAWDL,
 };
 
-/**
+/** 网络通信流量
  Get device network traffic bytes.
  
  @discussion This is a counter since the device's last boot time.
