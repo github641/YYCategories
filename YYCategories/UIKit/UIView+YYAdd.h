@@ -8,7 +8,12 @@
 //  This source code is licensed under the MIT-style license found in the
 //  LICENSE file in the root directory of this source tree.
 //
-
+/* lzy注170609：
+ 这个类，乍一看很像看过注释过了。回想一下是CALayer+YYAdd中有很多类似的扩展方法。
+ snapshotImage、snapshotPDF、setLayerShadow内部调用的是layer渲染
+ 
+ 
+ */
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -26,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Create a snapshot image of the complete view hierarchy.
  @discussion It's faster than "snapshotImage", but may cause screen updates.
- See -[UIView drawViewHierarchyInRect:afterScreenUpdates:] for more information.
+ See -[UIView drawViewHierarchyInRect:afterScreenUpdates:] for more information.将整个view的层级截图为image
  */
 - (nullable UIImage *)snapshotImageAfterScreenUpdates:(BOOL)afterUpdates;
 
@@ -35,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSData *)snapshotPDF;
 
-/**
+/**给view的layer添加阴影的封装方法
  Shortcut to set the view.layer's shadow
  
  @param color  Shadow Color
@@ -44,24 +49,24 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setLayerShadow:(nullable UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
 
-/**
+/**移除所有的子视图
  Remove all subviews.
  
  @warning Never call this method inside your view's drawRect: method.
  */
 - (void)removeAllSubviews;
 
-/**
+/**返回当前view所在视图控制器，可能为nil
  Returns the view's view controller (may be nil).
  */
 @property (nullable, nonatomic, readonly) UIViewController *viewController;
 
-/**
+/** 是算self的可视透明度，self的透明不仅和自身的透明度有关系，和其所有的父视图都有关系。且子视图的透明度是在父视图的透明度而基础上的。
  Returns the visible alpha on screen, taking into account superview and window.
  */
 @property (nonatomic, readonly) CGFloat visibleAlpha;
 
-/**
+/**把一个点的坐标，从调用对象的坐标系统，转换到指定view或者window的坐标系统中。
  Converts a point from the receiver's coordinate system to that of the specified view or window.
  
  @param point A point specified in the local coordinate system (bounds) of the receiver.

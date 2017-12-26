@@ -10,7 +10,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/* lzy注170608：
+ 主要是sv，向上下左右滚动的扩展。
+ 内部主要是调用了：
+ [self setContentOffset:off animated:animated];
+ off是在各个方向的偏移值
+ */
 NS_ASSUME_NONNULL_BEGIN
 
 /**

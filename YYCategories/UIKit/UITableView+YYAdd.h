@@ -17,7 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
  Provides extensions for `UITableView`.
  */
 @interface UITableView (YYAdd)
-
+/* lzy注170609：内部调用的是这个，
+ [self beginUpdates];
+ block(self);
+ [self endUpdates];
+ 执行一系列的方法调用，比如插入、删除、选择列表的某个分区的某行。调用这个方法，用于想在插入删除和选择操作执行时，进行动画。
+ 在block中不应该调用reloaData。如果调用了将没有动画，动画效果需要自己实现。
+ */
 /**
  Perform a series of method calls that insert, delete, or select rows and
  sections of the receiver.
@@ -56,10 +62,20 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param animated        YES if you want to animate the change in position,
                         NO if it should be immediate.
+ 
+ 滚动方法调用者，直到某一行或者某一个分区，定位到屏幕中。
+ 执行这个方法并不会让代理者收到代理方法scrollViewDidScroll:的消息。即该代理者的该代理方法不会被触发。
+ 
+ 这种，手动触发滚动后，将不在通知代理者滚动了的机制，似乎是约定俗成的。注释这么解释：as is normal for
+ programmatically-invoked user interface operations. 以编程的方式触发用户接口操作，。
+ 这个方法只是，将开发者传入的row和section合成NSIndexPath，之后调用：
+ [self scrollToRowAtIndexPath:indexPath atScrollPosition:scrollPosition animated:animated];
  */
 - (void)scrollToRow:(NSUInteger)row inSection:(NSUInteger)section atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animated;
 
-/**
+/** 内部调用
+ [self insertRowAtIndexPath:toInsert withRowAnimation:animation];
+ 
  Inserts a row in the receiver with an option to animate the insertion.
  
  @param row        Row index in section.
@@ -72,6 +88,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)insertRow:(NSUInteger)row inSection:(NSUInteger)section withRowAnimation:(UITableViewRowAnimation)animation;
 
 /**
+ 内部调用： [self reloadRowAtIndexPath:toReload withRowAnimation:animation];
+ 
+ 
  Reloads the specified row using a certain animation effect.
  
  @param row        Row index in section.
@@ -176,7 +195,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)reloadSection:(NSUInteger)section withRowAnimation:(UITableViewRowAnimation)animation;
 
-/**
+/** 把处于选中状态的而rows，置为非选中状态
+
  Unselect all rows in tableView.
  
  @param animated YES to animate the transition, NO to make the transition immediate.

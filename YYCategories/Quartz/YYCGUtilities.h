@@ -8,7 +8,10 @@
 //  This source code is licensed under the MIT-style license found in the
 //  LICENSE file in the root directory of this source tree.
 //
-
+/* lzy注170605：
+ 这个CG相关的工具类，很多是内联函数，很多没有接触过，看不大懂，可以在对绘制相关的api比较熟悉之后（18年6月5日可以吗），再来过一遍，
+ */
+// lzy171226注：又来快速回顾了一下。
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -33,12 +36,12 @@ CGSize YYScreenSize(void);
 
 
 
-/// Convert degrees to radians.
+/// Convert degrees to radians.角度转弧度
 static inline CGFloat DegreesToRadians(CGFloat degrees) {
     return degrees * M_PI / 180;
 }
 
-/// Convert radians to degrees.
+/// Convert radians to degrees.弧度转角度
 static inline CGFloat RadiansToDegrees(CGFloat radians) {
     return radians * 180 / M_PI;
 }

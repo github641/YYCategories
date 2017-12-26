@@ -8,7 +8,13 @@
 //  This source code is licensed under the MIT-style license found in the
 //  LICENSE file in the root directory of this source tree.
 //
-
+/* lzy注170608：
+ 在模拟器中测试了一下，
+ //    [self.view endEditing:YES];
+ //    [self.tf resignFirstResponder];
+ tf需要处于编辑状态
+ 
+ */
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
